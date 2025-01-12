@@ -17,8 +17,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 RUN pip3 install meson ninja
 
 ARG DPDK_VER
-ARG DPDK_SRC_DIR="/dpdk-src"
-ARG DPDK_DIR="/dpdk"
+ARG DPDK_SRC_DIR="/opt/dpdk-src"
+ARG DPDK_DIR="/opt/dpdk"
 
 RUN wget -O "/tmp/dpdk.tar.xz" "https://fast.dpdk.org/rel/dpdk-${DPDK_VER}.tar.xz" \
     && mkdir -p ${DPDK_SRC_DIR} ${DPDK_DIR} \
@@ -43,10 +43,10 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
         python3-pyelftools \
     && rm -rf /var/lib/apt/lists/*
 
-ARG DPDK_DIR="/dpdk"
+ARG DPDK_DIR="/opt/dpdk"
 ARG DPDK_LIB_DIR="${DPDK_DIR}/lib/x86_64-linux-gnu"
 
-COPY --from=builder /dpdk ${DPDK_DIR}
+COPY --from=builder /opt/dpdk ${DPDK_DIR}
 
 RUN echo "${DPDK_LIB_DIR}" > /etc/ld.so.conf.d/dpdk.conf \
     && ldconfig
