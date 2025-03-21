@@ -36,9 +36,11 @@ FROM ubuntu:${UBUNTU_VER} AS app
 
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get -y install --no-install-recommends \
+        iproute2 \
         libatomic1 \
         libbpf-dev \
         libnuma-dev \
+        pciutils \
         python3 \
         python3-pyelftools \
     && rm -rf /var/lib/apt/lists/*
