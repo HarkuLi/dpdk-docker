@@ -12,6 +12,10 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
         python3-pip \
         python3-pyelftools \
         wget \
+        # For MLX5 driver
+        ibverbs-providers \
+        libibverbs-dev \
+        #
     && rm -rf /var/lib/apt/lists/*
 
 RUN pip3 install meson ninja
@@ -43,6 +47,10 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
         pciutils \
         python3 \
         python3-pyelftools \
+        # For MLX5 driver
+        ibverbs-providers \
+        libibverbs-dev \
+        #
     && rm -rf /var/lib/apt/lists/*
 
 ARG DPDK_DIR="/opt/dpdk"
